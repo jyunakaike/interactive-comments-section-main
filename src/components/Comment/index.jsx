@@ -10,7 +10,6 @@ export const Comment = ({ content, createdAt, score, user, replies, style }) => 
   // console.log(user)
   // console.log(user.image.png)
   // console.log(user.username)
-
   // const stilo = {width: '80%'}
 
   return (
