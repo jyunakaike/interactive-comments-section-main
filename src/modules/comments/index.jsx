@@ -1,5 +1,6 @@
 import React ,{useState, useEffect}  from 'react'
 import { Comment } from './components/Comment';
+import { UserComment } from './components/UserComment';
 
 import data from '../../data/data.json'
 
@@ -38,6 +39,7 @@ export const Comments = () => {
                                 )
                             )
                         }
+                        <UserComment currentUser={currentUser} />
                     </div>
 
             }
