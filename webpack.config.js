@@ -11,6 +11,9 @@ module.exports = {
     mode: 'development',
     resolve: {
         extensions: ['.js', '.jsx'],
+        alias: {
+            '@images': path.resolve(__dirname, 'src/assets/images')
+        }
     },
     module: {
         rules: [
@@ -36,7 +39,11 @@ module.exports = {
                     "css-loader",
                     "sass-loader",
                 ],
-            }
+            },
+            {
+                test: /\.(png|webp|svg)$/,
+                type: 'asset'
+            },
         ]
     },
     plugins: [

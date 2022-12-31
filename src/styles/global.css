@@ -1,0 +1,19 @@
+@import 'vars';
+
+body{
+    background-color: var(--LightGray);
+    font-family: 'Rubik', sans-serif;
+}
+
+@media (max-width:400px) {
+    body{
+        font-size: 1rem;
+    }
+    h1{
+        font-size: 0.8rem;
+    }
+    h2{
+        font-size: 0.8rem;
+    }
+
+}

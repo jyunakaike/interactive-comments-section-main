@@ -1,0 +1,52 @@
+@import '../../../styles/vars';
+
+.card{
+    background-color:var(--VeryLightGray);
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+header img{
+    width: 2rem;
+}
+
+p{
+    color: var(--GrayishBlue);
+}
+
+footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scoreButton{
+    width: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--LightGray);
+    padding: 1rem;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.scoreButton .buton{
+    color: var(--LightGrayishBlue);
+}
+.scoreButton .score{
+    color: var(--ModerateBlue);
+}
+
+.replyButton .reply{
+    color: var(--ModerateBlue);
+    font-weight: bold;
+}

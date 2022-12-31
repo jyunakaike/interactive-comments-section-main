@@ -1,8 +1,11 @@
 import React from "react";
+import { Comments } from "../modules/comments";
+
+import '../styles/global.css'
 
 const App = () => {
     return (
-        <h1> Hello World! </h1>
+        <Comments />
     )
 }
 
