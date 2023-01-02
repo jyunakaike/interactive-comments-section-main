@@ -17,6 +17,30 @@ header img{
     width: 2rem;
 }
 
+
+.editComments{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.editComments .textArea{
+    width: 90%;
+    height: 5rem;
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.editComments .update{
+    background-color: var(--ModerateBlue);
+    border-radius: 10px;
+    padding: 0.5rem;
+    width: 4rem;
+    color: var(--White);
+}
+
 p{
     color: var(--GrayishBlue);
 }

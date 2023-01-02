@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { ReplyIcon } from './ReplyIcon'
 import { MinusIcon } from './MinusIcon'
 import { PlusIcon } from './PlusIcon'
@@ -31,6 +31,7 @@ export const Comment = (props) => {
 
     const [score, setScore] = useState();
     const [openDeleteDialog, setOpenDeleteDialog] = useState()
+    const [editComment, setEditComment] = useState(false)
 
     useEffect(() => {
         setScore(props.comment.score)
@@ -45,15 +46,18 @@ export const Comment = (props) => {
     const currentUser = props.currentUser
 
     const addScore = () => {
-        setScore(score+1)
+        setScore(score + 1)
     }
     const subScore = () => {
-        if(score > 0 ){
-            setScore(score-1)
+        if (score > 0) {
+            setScore(score - 1)
         }
     }
     const openDeleteModal = () => {
         setOpenDeleteDialog(!openDeleteDialog)
+    }
+    const openEditDialog = () => {
+        setEditComment(!editComment)
     }
 
     return (
@@ -64,59 +68,75 @@ export const Comment = (props) => {
                     <h1>{userName}</h1>
                     <p>{userCreatedAt}</p>
                 </header>
-                <section>
-                    <p>{comment}</p>
+                <section >
+                    {
+                        (editComment)
+                        ?
+                        <div className='editComments'>
+                            <textarea
+                                placeholder='Add a comment'
+                                className='textArea'
+                            >
+                                {comment}
+                            </textarea>
+                            <div className='update' onClick={openEditDialog}>
+                                UPDATE
+                            </div>
+
+                        </div>
+                        : <p>{comment}</p>
+                    }
                 </section>
                 <footer>
                     <div className='scoreButton' >
-                        <div onClick={()=> { addScore()}} style={{'display':'flex','justifyContent': 'center','alignItems':'center'}} >
-                            <PlusIcon  />
+                        <div onClick={() => { addScore() }} style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center' }} >
+                            <PlusIcon />
                         </div>
                         <label className='score'> {score} </label>
-                        <div onClick={()=> { subScore()}} style={{'display':'flex','justifyContent': 'center','alignItems':'center'}}>
+                        <div onClick={() => { subScore() }} style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center' }}>
                             <MinusIcon />
                         </div>
                     </div>
                     {
                         (currentUser.username === userName)
-                        ?
-                        <div className='currentUserButtons'>
-                            <div className='delete' onClick={openDeleteModal}>
-                                <DeleteIcon />
-                                <label >Delete</label> 
+                            ?
+                            <div className='currentUserButtons'>
+                                <div className='delete' onClick={openDeleteModal}>
+                                    <DeleteIcon />
+                                    <label >Delete</label>
+                                </div>
+                                <div className='edit' onClick={openEditDialog} >
+                                    <EditIcon />
+                                    <label >Edit</label>
+                                </div>
                             </div>
-                            <div className='edit' >
-                                <EditIcon />
-                                <label > Edit</label>
+                            :
+                            <div className='replyButton' onClick={() => { props.clickReply(id) }} >
+                                <ReplyIcon style={{ marginRight: '0.4rem' }} />
+                                <label className='reply' > Reply </label>
                             </div>
-                        </div>
-                        :
-                        <div className='replyButton' onClick={() => { props.clickReply(id) }} >
-                            <ReplyIcon style={{marginRight :'0.4rem'}} />
-                            <label className='reply' > Reply </label>
-                        </div>
                     }
                 </footer>
             </main>
             <main className='vl'>
-            {
-                (replies)
-                ?
-                replies.map(reply => (
-                    <div key={reply.id} >
-                        <ReplyComment  reply={reply} currentUser={currentUser}/>
-                    </div>
-                ))
-                :
-                null
-            }
+                {
+                    (replies)
+                        ?
+                        replies.map(reply => (
+                            <div key={reply.id} >
+                                <ReplyComment reply={reply} currentUser={currentUser} />
+                            </div>
+                        ))
+                        :
+                        null
+                }
             </main>
             {
                 (openDeleteDialog)
-                ?
-                <DeleteDialog  openDeleteModal={openDeleteModal}/>
-                :
-                null
+                    ?
+                    <DeleteDialog openDeleteModal={openDeleteModal} />
+                    :
+                    null
             }
 
         </React.Fragment>
