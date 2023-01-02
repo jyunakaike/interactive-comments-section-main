@@ -2,4 +2,5 @@
 
 svg:hover path{
     fill: var(--ModerateBlue);
+    cursor: pointer;
 }

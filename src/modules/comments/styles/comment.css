@@ -7,16 +7,15 @@
     border-radius: 15px;
 }
 
-header{
+.headerInformation{
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-header img{
+.headerInformation img{
     width: 2rem;
 }
-
 
 .editComments{
     display: flex;
@@ -39,6 +38,10 @@ header img{
     padding: 0.5rem;
     width: 4rem;
     color: var(--White);
+}
+.editComments .update:hover{
+    cursor: pointer;
+    opacity: 0.5;
 }
 
 p{
@@ -83,18 +86,77 @@ footer{
     font-weight: bold;
 }
 
+.currentUserButtons .delete:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+
 .currentUserButtons .edit{
     color: var(--ModerateBlue);
     font-weight: bold;
+}
+.currentUserButtons .edit:hover{
+    opacity: 0.5;
+    cursor: pointer;
 }
 
 .replyButton .reply{
     color: var(--ModerateBlue);
     font-weight: bold;
 }
+.replyButton:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
 
 .vl{
     margin-left: 1rem;
     border-left: 1px solid var(--LightGrayishBlue);
     height: 100%;
+}
+
+@media (min-width:1080px) {
+    .card{
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .scoreButton{
+        width: 3rem;
+        height: 5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--LightGray);
+        padding: 1rem;
+        border-radius: 15px;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 1rem;
+    }
+
+    .currentUserButtons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+    .currentUserButtons .delete{
+        color: var(--SoftRed);
+        font-weight: bold;
+    }
+    
+    .currentUserButtons .edit{
+        color: var(--ModerateBlue);
+        font-weight: bold;
+    }
+    
 }

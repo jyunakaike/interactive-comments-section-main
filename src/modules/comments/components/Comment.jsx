@@ -63,60 +63,112 @@ export const Comment = (props) => {
     return (
         <React.Fragment>
             <main className='card'>
-                <header>
-                    <img src={userImage} alt="userLogo" />
-                    <h1>{userName}</h1>
-                    <p>{userCreatedAt}</p>
-                </header>
-                <section >
-                    {
-                        (editComment)
+                {
+                    (window.innerWidth > 400)
                         ?
-                        <div className='editComments'>
-                            <textarea
-                                placeholder='Add a comment'
-                                className='textArea'
-                            >
-                                {comment}
-                            </textarea>
-                            <div className='update' onClick={openEditDialog}>
-                                UPDATE
+                        <div className='scoreButton' >
+                            <div onClick={() => { addScore() }} style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center' }} >
+                                <PlusIcon />
                             </div>
+                            <label className='score'> {score} </label>
+                            <div onClick={() => { subScore() }} style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center' }}>
+                                <MinusIcon />
+                            </div>
+                        </div>
+                        :
+                        null
+                }
 
+                <div>
+                    <header>
+                        <div className='headerInformation'>
+                            <img src={userImage} alt="userLogo" />
+                            <h1>{userName}</h1>
+                            <p>{userCreatedAt}</p>
                         </div>
-                        : <p>{comment}</p>
-                    }
-                </section>
-                <footer>
-                    <div className='scoreButton' >
-                        <div onClick={() => { addScore() }} style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center' }} >
-                            <PlusIcon />
-                        </div>
-                        <label className='score'> {score} </label>
-                        <div onClick={() => { subScore() }} style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center' }}>
-                            <MinusIcon />
-                        </div>
-                    </div>
+
+                        {
+                            (window.innerWidth > 400)
+                                ?
+                                (currentUser.username === userName)
+                                    ?
+                                    <div className='currentUserButtons'>
+                                        <div className='delete' onClick={openDeleteModal}>
+                                            <DeleteIcon />
+                                            <label >Delete</label>
+                                        </div>
+                                        <div className='edit' onClick={openEditDialog} >
+                                            <EditIcon />
+                                            <label >Edit</label>
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className='replyButton' onClick={() => { props.clickReply(id) }} >
+                                        <ReplyIcon style={{ marginRight: '0.4rem' }} />
+                                        <label className='reply' > Reply </label>
+                                    </div>
+                                : 
+                                null
+                        }
+                    </header>
+                    <section >
+                        {
+                            (editComment)
+                                ?
+                                <div className='editComments'>
+                                    <textarea
+                                        placeholder='Add a comment'
+                                        className='textArea'
+                                    >
+                                        {comment}
+                                    </textarea>
+                                    <div className='update' onClick={openEditDialog}>
+                                        UPDATE
+                                    </div>
+
+                                </div>
+                                : <p>{comment}</p>
+                        }
+                    </section>
                     {
-                        (currentUser.username === userName)
+                        (window.innerWidth < 400)
                             ?
-                            <div className='currentUserButtons'>
-                                <div className='delete' onClick={openDeleteModal}>
-                                    <DeleteIcon />
-                                    <label >Delete</label>
+                            <footer>
+                                <div className='scoreButton' >
+                                    <div onClick={() => { addScore() }} style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center' }} >
+                                        <PlusIcon />
+                                    </div>
+                                    <label className='score'> {score} </label>
+                                    <div onClick={() => { subScore() }} style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center' }}>
+                                        <MinusIcon />
+                                    </div>
                                 </div>
-                                <div className='edit' onClick={openEditDialog} >
-                                    <EditIcon />
-                                    <label >Edit</label>
-                                </div>
-                            </div>
-                            :
-                            <div className='replyButton' onClick={() => { props.clickReply(id) }} >
-                                <ReplyIcon style={{ marginRight: '0.4rem' }} />
-                                <label className='reply' > Reply </label>
-                            </div>
+                                {
+                                    (currentUser.username === userName)
+                                        ?
+                                        <div className='currentUserButtons'>
+                                            <div className='delete' onClick={openDeleteModal}>
+                                                <DeleteIcon />
+                                                <label >Delete</label>
+                                            </div>
+                                            <div className='edit' onClick={openEditDialog} >
+                                                <EditIcon />
+                                                <label >Edit</label>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className='replyButton' onClick={() => { props.clickReply(id) }} >
+                                            <ReplyIcon style={{ marginRight: '0.4rem' }} />
+                                            <label className='reply' > Reply </label>
+                                        </div>
+                                }
+                            </footer>
+                            : null
                     }
-                </footer>
+
+                </div>
+
+
             </main>
             <main className='vl'>
                 {
@@ -134,7 +186,7 @@ export const Comment = (props) => {
             {
                 (openDeleteDialog)
                     ?
-                    <DeleteDialog openDeleteModal={openDeleteModal} />
+                    <DeleteDialog openDeleteModal={openDeleteModal} id={id} />
                     :
                     null
             }

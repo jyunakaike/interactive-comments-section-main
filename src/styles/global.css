@@ -17,3 +17,9 @@ body{
     }
 
 }
+
+@media( min-width:400px ){
+    body{
+        padding:0 25%;        
+    }
+}

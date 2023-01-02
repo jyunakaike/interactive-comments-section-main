@@ -8,7 +8,7 @@ export const DeleteDialog = (props) => {
             <div className='ModalContainer-overlay'>
                 <div className='ModalContainer-overlay-container'>
                     <div className='ModalContainer-element'>
-                        <h1>Delete Comment</h1>
+                        <h1>Delete Comment </h1>
                         <label > Are you sure you want to delete this comment? This will remove the comment and can't be undone</label>
                         <footer>
                             <div className='cancel' onClick={props.openDeleteModal}>
@@ -21,8 +21,6 @@ export const DeleteDialog = (props) => {
                     </div>
                 </div>
             </div>
-
-
         </React.Fragment>
     )
 }
