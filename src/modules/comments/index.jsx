@@ -8,6 +8,7 @@ export const Comments = () => {
     const [currentUser, setCurrentUser] = useState();
     const [comments, setComments] = useState()
     const [loading, setLoading] = useState(true)
+    const [commentReply, setCommentReply] = useState()
 
     useEffect(() => {
         setLoading(true)
@@ -16,11 +17,16 @@ export const Comments = () => {
         // console.log(response.currentUser);
         // console.log(response.comments);
         setCurrentUser(response.currentUser)
+        // localStorage.setItem('User', response.currentUser)
         setComments(response.comments)
         // console.log(currentUser);
         // console.log(comments);
         setLoading(false)
     }, [])
+
+    const clickReply = (userId) => {
+        setCommentReply(userId)
+    }
 
     return (
         <React.Fragment>
@@ -34,7 +40,15 @@ export const Comments = () => {
                             comments.map(comment => (
                                     <div key={comment.id}>
                                         {/* {console.log(comment)} */}
-                                        <Comment comment={comment} />
+                                        <Comment comment={comment} clickReply={clickReply} currentUser={currentUser} />
+                                        {
+                                            (comment.id === commentReply)
+                                            ?
+                                            <UserComment currentUser={currentUser} />
+                                            :
+                                            null
+                                        }
+                                        
                                     </div>
                                 )
                             )

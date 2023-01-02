@@ -1,0 +1,5 @@
+@import '../../../styles/vars';
+
+svg:hover path{
+    fill: var(--ModerateBlue);
+}
