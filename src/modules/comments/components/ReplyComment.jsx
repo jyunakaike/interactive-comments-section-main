@@ -13,8 +13,8 @@ export const ReplyComment = (props) => {
     }
 
     return (
-        <div style={{ 'marginLeft': '5rem', }}>
-            <Comment comment={reply} clickReply={clickReply} />
+        <div style={{ 'marginLeft': '1rem', }}>
+            <Comment comment={reply} clickReply={clickReply} currentUser={currentUser} />
             {
                 (reply.id === commentReply)
                 ?

@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import IconReply from '../../../assets/images/icon-reply.svg'
+import { ReplyIcon } from './ReplyIcon'
 import { MinusIcon } from './MinusIcon'
 import { PlusIcon } from './PlusIcon'
 import { ReplyComment } from './ReplyComment'
+import { DeleteIcon } from './DeleteIcon'
+import { EditIcon } from './EditIcon'
+import { DeleteDialog } from './DeleteDialog'
 
 import '../styles/comment.css'
 
@@ -27,11 +30,13 @@ export const Comment = (props) => {
     // clickReply Function
 
     const [score, setScore] = useState();
+    const [openDeleteDialog, setOpenDeleteDialog] = useState()
+
     useEffect(() => {
         setScore(props.comment.score)
     }, [])
 
-    const userId = props.comment.id
+    const id = props.comment.id
     const userImage = require(`../../../assets${props.comment.user.image.png}`)
     const userName = props.comment.user.username
     const userCreatedAt = props.comment.createdAt
@@ -46,6 +51,9 @@ export const Comment = (props) => {
         if(score > 0 ){
             setScore(score-1)
         }
+    }
+    const openDeleteModal = () => {
+        setOpenDeleteDialog(!openDeleteDialog)
     }
 
     return (
@@ -69,24 +77,47 @@ export const Comment = (props) => {
                             <MinusIcon />
                         </div>
                     </div>
-                    <div className='replyButton' onClick={() => { props.clickReply(userId) }} >
-                        <img src={IconReply} alt="ReplyIcon" style={{marginRight :'0.4rem'}} />
-                        <label className='reply' > Reply </label>
-                    </div>
+                    {
+                        (currentUser.username === userName)
+                        ?
+                        <div className='currentUserButtons'>
+                            <div className='delete' onClick={openDeleteModal}>
+                                <DeleteIcon />
+                                <label >Delete</label> 
+                            </div>
+                            <div className='edit' >
+                                <EditIcon />
+                                <label > Edit</label>
+                            </div>
+                        </div>
+                        :
+                        <div className='replyButton' onClick={() => { props.clickReply(id) }} >
+                            <ReplyIcon style={{marginRight :'0.4rem'}} />
+                            <label className='reply' > Reply </label>
+                        </div>
+                    }
                 </footer>
             </main>
+            <main className='vl'>
             {
                 (replies)
                 ?
                 replies.map(reply => (
-                    <div key={reply.id}>
+                    <div key={reply.id} >
                         <ReplyComment  reply={reply} currentUser={currentUser}/>
                     </div>
                 ))
                 :
                 null
             }
-
+            </main>
+            {
+                (openDeleteDialog)
+                ?
+                <DeleteDialog  openDeleteModal={openDeleteModal}/>
+                :
+                null
+            }
 
         </React.Fragment>
     )

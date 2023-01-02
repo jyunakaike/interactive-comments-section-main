@@ -48,7 +48,29 @@ footer{
     color: var(--ModerateBlue);
 }
 
+.currentUserButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.currentUserButtons .delete{
+    color: var(--SoftRed);
+    font-weight: bold;
+}
+
+.currentUserButtons .edit{
+    color: var(--ModerateBlue);
+    font-weight: bold;
+}
+
 .replyButton .reply{
     color: var(--ModerateBlue);
     font-weight: bold;
+}
+
+.vl{
+    margin-left: 1rem;
+    border-left: 1px solid var(--LightGrayishBlue);
+    height: 100%;
 }
